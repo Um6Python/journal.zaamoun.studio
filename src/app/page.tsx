@@ -52,6 +52,14 @@ export default function Home() {
           </div>
         )}
       </div>
+
+      <Link
+        href="/new"
+        className="fixed bottom-8 right-8 w-14 h-14 bg-foreground text-background rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300 z-50 group"
+        aria-label="New Entry"
+      >
+        <span className="text-2xl font-light pb-1 group-hover:rotate-90 transition-transform duration-300">+</span>
+      </Link>
     </main>
   );
 }
