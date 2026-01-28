@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { SpotifyEmbed } from '@/components/spotify-embed';
 import { ReflectionPrompts } from '@/components/reflection-prompts';
+import { DeleteButton } from '@/components/delete-button';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
@@ -83,6 +84,10 @@ export default async function EntryPage({ params }: { params: Promise<{ slug: st
                     {entry.frontmatter.reflection_prompts && (
                         <ReflectionPrompts prompts={entry.frontmatter.reflection_prompts} />
                     )}
+
+                    <div className="flex justify-center pt-12 opacity-50 hover:opacity-100 transition-opacity">
+                        <DeleteButton slug={entry.slug} />
+                    </div>
                 </div>
             </div>
         </main>

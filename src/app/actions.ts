@@ -74,3 +74,29 @@ date: "${dateStr}"
 
     redirect('/');
 }
+
+export async function deleteEntry(slug: string) {
+    if (!slug) throw new Error("No slug provided");
+
+    const contentDirectory = path.join(process.cwd(), 'content/journal');
+
+    // Try to find the file (md or mdx)
+    let filePath = path.join(contentDirectory, `${slug}.mdx`);
+    if (!fs.existsSync(filePath)) {
+        filePath = path.join(contentDirectory, `${slug}.md`);
+    }
+
+    if (!fs.existsSync(filePath)) {
+        throw new Error("Entry not found");
+    }
+
+    try {
+        fs.unlinkSync(filePath);
+        revalidatePath('/');
+    } catch (error) {
+        console.error("Failed to delete entry:", error);
+        throw new Error("Failed to delete entry");
+    }
+
+    redirect('/');
+}
